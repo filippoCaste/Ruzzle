@@ -1,0 +1,31 @@
+INPUT PROBLEMA:
+	Stringa da riconoscere 'parola'
+	Contenuto della Board
+	Posizione della prima lettera (per efficienza)
+
+SOLUZIONE PARZIALE:
+	Una stringa, parte della 'parola' che è stata riconosciuta.
+	Elenco delle posizioni delle lettere
+	
+SOLUZIONE TOTALE:
+	la parola riconosciuta per intero
+	Elenco delle posizioni delle lettere
+	
+LIVELLO RICORSIONE:
+	Il numero di caratteri -- size di parziale
+	
+CONDIZIONI DI TERMINAZIONE:
+	livello == lunghezza della parola da riconoscere
+	se viene trovata una parola stoppo la ricorsione
+	
+AVVIO RICORSIONE:
+	livello = 1
+	Si parte dalla posizione della prima lettera della parola cercata, se c'è
+	
+STRUTTURE DATI:
+	Stringa parziale
+	Intero livello
+	Lista<Posizione> parziale, il percorso delle posizioni
+..............................................................................................
+Altro approccio prevede di aggiungere una lettera alla volta e vedere se tale combinazione
+è presente all'interno del dizionario --> non controlla parola per parola.

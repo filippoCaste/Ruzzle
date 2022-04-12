@@ -16,6 +16,10 @@ import javafx.beans.property.StringProperty;
 public class Board {
 	private List<Pos> positions;
 	private Map<Pos, StringProperty> cells;
+	// le StringProperty hanno proprietà di binding -- sono di javaFx e permettono di non dover fare
+	// setText() -> con la StringProperty in autom. viene riflesso il cambiamento.
+	
+	// - viene modificata la struttura dati --> cambia l'interfaccia (o vv.)
 
 	private int size;
 
@@ -73,7 +77,7 @@ public class Board {
 			int random = (int)(Math.random()*26) ;
 			String letter = Character.toString((char)('A'+random)) ;
 			
-			//grazie al "binding" fatto in FXMLController, la "set" modifica direttamente il testo del botone collegato alla posizione corrente
+			//grazie al "binding" fatto in FXMLController, la "set" modifica direttamente il testo del bottone collegato alla posizione corrente
 			this.cells.get(p).set(letter); 
 		}
 	}
