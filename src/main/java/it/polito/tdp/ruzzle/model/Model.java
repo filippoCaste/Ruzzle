@@ -1,7 +1,9 @@
 package it.polito.tdp.ruzzle.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import it.polito.tdp.ruzzle.db.DizionarioDAO;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,12 +14,13 @@ public class Model {
 	private Board board ;
 	private List<String> dizionario ;
 	private StringProperty statusText ;
+	private DizionarioDAO dao;
 
 	public Model() {
 		this.statusText = new SimpleStringProperty() ;
 		
 		this.board = new Board(SIZE);
-		DizionarioDAO dao = new DizionarioDAO() ;
+		dao = new DizionarioDAO() ;
 		this.dizionario = dao.listParola() ;
 		statusText.set(String.format("%d parole lette", this.dizionario.size())) ;
 	
@@ -47,7 +50,7 @@ public class Model {
 	}
 
 	public List<Pos> trovaParola(String parola) {
-		Ricerca ricerca = new Ricerca();
+		Ricerca2 ricerca = new Ricerca2();
 		return ricerca.trovaParola(parola, this.board);
 	}
 	
@@ -63,11 +66,13 @@ public class Model {
 	}
 	
 	public boolean cercaSubParola(String parola) {
-		for(String s : dizionario) {
-			if(s.substring(0, parola.length()).equals(parola)) {
+		Set<String> dict = new HashSet<>(this.dao.paroleAPartireDaLettera(parola.substring(0,1)));
+		for(String s : dict) {
+			if(s.length()>=parola.length() && s.substring(0, parola.length()).equals(parola)) {
 				return true;
 			}
 		}
+		System.out.println("\n\nParola non trovata");
 		return false;
 	}
 	
